@@ -24,6 +24,11 @@ RUN set -xe \
     && apk del .deps \
     && rm -rf /tmp/* /usr/local/lib/php/doc/* /var/cache/apk/*
 
+RUN apk --update add curl \
+    && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
+    && apk del .deps \
+    && rm -rf /tmp/* /usr/local/lib/php/doc/* /var/cache/apk/*
+
 COPY ./laravel.ini  /usr/local/etc/php/conf.d
 COPY ./xlaravel.pool.conf /usr/local/etc/php-fpm.d/
 
